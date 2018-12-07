@@ -12,6 +12,10 @@
 */
 
 Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/autenticacao', function () {
     $query = http_build_query([
         'client_id' => 3,
         'redirect_uri' => 'http://localhost:9000/callback',
@@ -44,3 +48,6 @@ Route::get('callback', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/messages', 'MessagesController@send')->name('messages');
+Route::get('/message', 'MessagesController@create')->name('message');
+Route::post('/message', 'MessagesController@store')->name('message');

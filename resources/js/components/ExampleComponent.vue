@@ -3,10 +3,15 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card card-default">
-                    <div class="card-header">Example Component</div>
+                    <div class="card-header">Mensagem</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        <div class="alert alert-info" v-if="messages.length <= 0">Nenhuma mensagem</div>
+                       <p v-for="(message, index) in messages" :key="index">
+                           <strong> {{message.title}}</strong><br>
+                           {{message.body}}<br>
+                           <small>{{message.created_at}}</small>
+                       </p>
                     </div>
                 </div>
             </div>
@@ -16,8 +21,19 @@
 
 <script>
     export default {
+        props: [
+            'userId'
+        ],
+        data() {
+            return {
+                messages: []
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
+            Echo.private('message-received.' + this.userId)
+                .listen('SendMessage', (e) => {
+                    this.messages.push(e);
+                })
         }
     }
 </script>

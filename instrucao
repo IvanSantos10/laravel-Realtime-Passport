@@ -1,0 +1,12 @@
+composer require pusher/pusher-php-server "~3.0"
+npm install --save socket.io-client
+
+https://github.com/tlaverdure/laravel-echo-server
+ - npm install -g laravel-echo-server
+ - laravel-echo-server init
+ - laravel-echo-server client:add APP_ID
+ - laravel-echo-server start
+
+npm install --save laravel-echo
+
+art make:event SendMessage
